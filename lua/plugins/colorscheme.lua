@@ -1,24 +1,27 @@
 return {
   "gruvbox-community/gruvbox",
-  "catppuccin/vim",
+  "catppuccin/nvim",
   "rebelot/kanagawa.nvim",
   "elvessousa/sobrio",
   "ray-x/aurora",
   "EdenEast/nightfox.nvim",
   "liuchengxu/space-vim-dark",
-  "catppuccin/vim",
-  "folke/tokyonight.nvim",
-  "savq/melange-nvim",
-  "jacoborus/tender.vim",
-  "Shatur/neovim-ayu",
-  "navarasu/onedark.nvim",
-  "drewxs/ash.nvim",
-  "scottmckendry/cyberdream.nvim",
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      transparent = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
+    },
+  },
   {
     "LazyVim/LazyVim",
     opts = {
       colorscheme = "gruvbox",
-      theme = "light",
     },
   },
 }

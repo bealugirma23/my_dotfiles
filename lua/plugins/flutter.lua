@@ -48,7 +48,7 @@ return {
           },
         },
       },
-      debugger = { enabled = true, run_via_dap = true },
+      debugger = { enabled = false, run_via_dap = true },
     })
   end,
 }
