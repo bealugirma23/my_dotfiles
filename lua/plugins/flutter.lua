@@ -1,6 +1,7 @@
 return {
   "nvim-flutter/flutter-tools.nvim",
-  lazy = false, -- Load immediately to ensure LSP starts
+  -- lazy = false, -- Load immediately to ensure LSP starts
+  ft = { "dart" },
   dependencies = {
     "nvim-lua/plenary.nvim",
     "stevearc/dressing.nvim",
@@ -21,10 +22,10 @@ return {
         -- open_cmd = "tab split", -- Command to open the dev log
         open_cmd = "botright 12split",
       },
-      dev_tools = { autostart = true, auto_open_browser = false },
+      dev_tools = { autostart = false, auto_open_browser = false },
       outline = {
         open_cmd = "30vsplit", -- Command to open the outline
-        auto_open = true, -- Open outline automatically
+        auto_open = false, -- Open outline manually to avoid startup stutter
       },
       lsp = {
         color = {
@@ -34,21 +35,16 @@ return {
           foreground = false,
           virtual_text = true,
         },
-        on_attach = function(client, bufnr)
-          -- Ensure keymaps are set
-          vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "Go to definition" })
-          vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr, desc = "Hover" })
-        end,
         settings = {
           showTodos = true,
           completeFunctionCalls = true,
-          analysisExcludedFolders = {
-            "${workspaceFolder}/.flutter",
-            "${workspaceFolder}/.dart_tool",
-          },
+          -- NOTE: analysisExcludedFolders requires ABSOLUTE paths.
+          -- ${workspaceFolder} is a VS Code variable and does NOT expand in Neovim.
+          -- dartls already excludes .dart_tool by default; only add absolute paths here if needed.
+          analysisExcludedFolders = {},
         },
       },
-      debugger = { enabled = false, run_via_dap = true },
+      debugger = { enabled = false, run_via_dap = false },
     })
   end,
 }

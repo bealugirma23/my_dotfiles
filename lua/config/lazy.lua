@@ -13,9 +13,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   end
 end
 vim.opt.rtp:prepend(lazypath)
-vim.opt.number = false -- turn off absolute numbers
-vim.opt.relativenumber = true -- turn on relative numbers
-vim.opt.wrap = false
 
 require("lazy").setup({
   spec = {
@@ -35,7 +32,7 @@ require("lazy").setup({
   },
   install = { colorscheme = { "tokyonight", "habamax" } },
   checker = {
-    enabled = true, -- check for plugin updates periodically
+    enabled = false, -- avoid background update checks during startup
     notify = false, -- notify on update
   }, -- automatically check for plugin updates
   performance = {
@@ -43,9 +40,9 @@ require("lazy").setup({
       -- disable some rtp plugins
       disabled_plugins = {
         "gzip",
-        -- "matchit",
+        "matchit",
         -- "matchparen",
-        -- "netrwPlugin",
+        "netrwPlugin",
         "tarPlugin",
         "tohtml",
         "tutor",
